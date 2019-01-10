@@ -1,0 +1,19 @@
+{
+  "images": [{
+      "link": "images/parallax1.jpg",
+      "caption": "One"
+    },
+    {
+      "link": "images/parallax2.jpg",
+      "caption": "Two"
+    },
+    {
+      "link": "images/parallax4.jpg",
+      "caption": "Three"
+    },
+    {
+      "link": "images/parallax5.jpg",
+      "caption": "Four"
+    }
+  ]
+}

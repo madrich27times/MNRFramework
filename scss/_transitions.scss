@@ -1,0 +1,69 @@
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+.trans-ease {
+  @include transition(1s ease);
+}
+
+.trans-ease-in {
+  @include transition(1s ease-in);
+}
+
+.trans-ease-out {
+  @include transition(1s ease-out);
+}
+
+.trans-ease-in-out {
+  @include transition(1s ease-in-out);
+}
+
+.trans-linear {
+  @include transition(1s linear);
+}
+
+//height
+.trans-ease-h {
+  @include transition(height 1s ease);
+}
+
+.trans-ease-in-h {
+  @include transition(height 1s ease-in);
+}
+
+.trans-ease-out-h {
+  @include transition(height 1s ease-out);
+}
+
+.trans-ease-in-out-h {
+  @include transition(height 1s ease-in-out);
+}
+
+.trans-linear-h {
+  @include transition(height 1s linear);
+}
+
+//width
+.trans-ease-w {
+  @include transition(width 1s ease);
+}
+
+.trans-ease-in-w {
+  @include transition(width 1s ease-in);
+}
+
+.trans-ease-out-w {
+  @include transition(width 1s ease-out);
+}
+
+.trans-ease-in-out-w {
+  @include transition(width 1s ease-in-out);
+}
+
+.trans-linear-w {
+  @include transition(width 1s linear);
+}

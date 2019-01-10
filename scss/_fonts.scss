@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway|Roboto|Roboto+Mono");
+
+$bodyFont: 'Roboto', sans-serif;
+$headingFont: 'Raleway', sans-serif;
+$codeFont:'Roboto Mono', monospace;
+
+
+@mixin font-body($size: 1em) {
+  font: {
+    size: $size;
+    family: $bodyFont;
+  }
+}
+
+@mixin font-heading() {
+  font: {
+    family: $headingFont;
+    weight: bold;
+  }
+}
+
+@mixin font-code($size: 1em) {
+  font: {
+    size: $size;
+    family: $codeFont;
+  }
+}

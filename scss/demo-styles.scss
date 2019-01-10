@@ -1,0 +1,189 @@
+$mainColor: #000;
+
+header {
+  border: $mainColor 1px solid;
+}
+
+/*
+FUNCTIONS
+
+$color: #000;
+color: lighten($color, 10%);
+color: darken($color, 10%);
+
+color: saturate($color, 10%);
+color: desaturate($color, 10%);
+
+color: fade-in($color, .1);
+color: fade-out($color, .1);
+
+color: invert($color);
+color: complement($color);
+
+$quoted: quote($sometext)
+$unquoted: unquote($sometext);
+
+$value: if(true, $color1, $color2);
+$rnd: round(3.14);
+$top: ceil(3.14);
+$bot: floor(3.14);
+$per: percentage(.14);
+
+STRING INTERPOLATION
+
+$root: "/images/";
+
+#form {
+	background: url("#{$root}background.jpg");
+}
+
+$name: "my-class";
+.#{$name}{
+	color:Blue;
+}
+
+RULES
+
+nesting elements
+
+nav {
+	font-size: 0.6em;
+	font-weight: bold;
+	float: right;
+	ul {
+		list-style-type: none; 
+		li {
+			float: left;
+			margin: 2px;
+		}
+	}
+}
+
+parenting rule
+
+a {
+	text-decoration: none;
+	&hover: {
+		text-decoration: underline;
+	}
+}
+
+nesting properties
+
+.button {
+	font: {
+		family: Helvetica;
+		size: 0.8em;
+	}
+}
+
+DIRECTIVES
+
+@import "filename";
+
+#main {
+	@import "colors";
+}
+
+@extend --> inheritance
+
+.button {
+	color: #000;
+}
+
+.submit-button {
+	@extend .button;
+	@extend a:hover;
+	border: 1px solid #000;
+}
+
+@mixin --> repeatable sections/functions
+
+@mixin font-large {
+	font: {
+		size: 2em;
+		family: sans-serif;
+		weight: bold;
+	}
+}
+
+#form {
+	@include font-large;
+}
+
+add default: 5px
+@mixin rounded-corners-all($size: 5px){
+	border-radius: $size;
+	-webkit-border-radius: $size;
+	-mozilla-border-radius: $size;
+}
+
+#form {
+	@include rounded-corners-all(10px);
+	or @include rounded-corners-all; uses default 5px
+}
+
+/////////////////USE FOR RESPONSIVENESS///////////////////////////
+$app-width: 900px;
+@function column-width($cols){
+	@return ($app-width / $cols) - ($cols * 5px);
+}
+
+.col2 {
+	width: column-width(2);
+}
+
+.col3 {
+	column-width(3);
+}
+
+@app-size: 1024px;
+@function center-width($gutter) {
+	@return $app-size - ($gutter * 2);
+}
+
+CONTROLLED DIRECTIVES
+
+h1 {
+	@if $size > 14px {
+		color: Blue;
+	}
+	@else if $size < 14px{
+		color: Red;
+	}
+	@else {
+		color: Green;
+	}
+}
+
+$page-width: 1000px;
+@for $col from 1 through 4 {
+	.col#{$col}{
+		width: $page-width / $col;
+	}
+}
+
+
+@each $item in first, second, third, fourth {
+	#{$item} {
+		background: url(/images/#{item}.jpg);
+	}
+}
+
+$i: 1;
+@while $i < 5 {
+	h#{$i}{
+		font-size: $i * 4px;
+		$i: $i + 1;
+	}
+}
+
+
+//generates a CSS class rule for each column
+//and sets a width for each one
+@for $colNumber from 2 through 5 {
+	.col-#{$colNumber} {
+		width: $app-size / $colNumber - 10px;
+	}
+}
+*/

@@ -1,0 +1,88 @@
+//set aesthetic properties (colors, fonts)
+@import "colors";
+@import "fonts";
+@mixin body-style($size: 1em) {
+  @include font-body($size);
+  color: $secondaryColor;
+}
+
+@mixin heading-style() {
+  @include font-heading;
+  color: $secondaryColor;
+}
+
+@mixin link-style() {
+  @include font-body(1em);
+}
+
+@function quoteText($sometext) {
+  @return quote($sometext);
+}
+
+@mixin dark-nav() {
+  background-color: $secondaryColor;
+  ul {
+    li {
+      a {
+        &:link {
+          color: $mainColor;
+        }
+        &:visited {
+          color: $mainColor;
+        }
+        &:hover {
+          color: lightenColor($secondaryColor, 80%);
+        }
+        &:active {
+          color: lightenColor($secondaryColor, 80%);
+        }
+      }
+    }
+  }
+}
+
+@mixin light-nav() {
+  background-color: $mainColor;
+  ul {
+    li {
+      a {
+        &:link {
+          color: $secondaryColor;
+        }
+        &:visited {
+          color: $secondaryColor;
+        }
+        &:hover {
+          color: lightenColor($secondaryColor, 50%);
+        }
+        &:active {
+          color: lightenColor($secondaryColor, 50%);
+        }
+      }
+    }
+  }
+}
+
+@mixin light-nav-color() {
+  background-color: $mainColor;
+  // background-color: lightenColor($accentColor, 10%);
+  // border-radius: 10px;
+  ul {
+    li {
+      a {
+        &:link {
+          color: $secondaryColor;
+        }
+        &:visited {
+          color: $secondaryColor;
+        }
+        &:hover {
+          color: getComplement($accentTwo);
+        }
+        &:active {
+          color: getComplement($accentTwo);
+        }
+      }
+    }
+  }
+}

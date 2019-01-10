@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "index.html",
+    "setup.html",
+    "elements.html",
+    "forms.html",
+    "tables.html",
+    "buttons.html",
+    "images.html",
+    "colors.html",
+    "fonts.html",
+    "transitions.html",
+    "classes.html"
+  ]
+}

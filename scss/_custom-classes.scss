@@ -1,0 +1,969 @@
+@import "ui-elements";
+@import "flexbox-mixins";
+@import "transitions";
+@import "transforms";
+@import "animations";
+@import "keyframes";
+@import "layout";
+@import "font-awesome";
+//img-card: place on div
+// <div class="img-card">
+//   <img class="img-responsive">
+//   <div class="img-card-container">
+//     <p>Some text</p>
+//   </div>
+// </div>
+.img-card {
+  width: 80%;
+  background-color: $mainColor;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+  margin: 10px;
+  img {
+    width: 100%;
+  }
+  .img-card-container {
+    text-align: center;
+    padding: 10px 20px;
+  }
+}
+
+//img-overlay: place on div
+// <div class="img-overlay-container">
+//   <img class="img-responsive">
+//   <div class="img-overlay-fade">
+//     <div class="img-overlay-text">Some text</div>
+//   </div>
+// </div>
+@mixin Overlay($position, $top, $bottom, $left, $right, $height, $width, $opacity, $transition, $overflow) {
+  position: $position;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+  width: $width;
+  height: $height;
+  opacity: $opacity;
+  @include transition($transition);
+  overflow: $overflow;
+}
+
+@mixin OverlayColor($color) {
+  background-color: $color;
+}
+
+@mixin OverlayText($color, $font-size, $position, $top, $left, $transform-amount, $overflow, $white-space) {
+  font: {
+    family: $headingFont;
+    size: $font-size;
+  }
+  color: $color;
+  position: $position;
+  top: $top;
+  left: $left;
+  @include transform($transform-amount);
+  overflow: $overflow;
+  white-space: $white-space;
+}
+
+//fade
+.img-overlay-container {
+  position: relative;
+  width: 50%;
+  img {
+    width: 100%;
+  }
+  .img-overlay-fade {
+    @include Overlay(absolute, 0, 0, 0, 0, 100%, 100%, 0, .5s ease, none);
+    @include OverlayColor($accentColor);
+    .img-overlay-text {
+      @include OverlayText($mainColor, 1em, absolute, 50%, 50%, translate(-50%, -50%), none, none);
+    }
+  }
+  .img-overlay-slide-down {
+    @include Overlay(absolute, 0, 0, 0, 0, 0, 100%, 0, .5s ease, hidden);
+    @include OverlayColor($accentColor);
+    .img-overlay-text {
+      @include OverlayText($mainColor, 1em, absolute, 50%, 50%, translate(-50%, -50%), hidden, nowrap);
+    }
+  }
+  .img-overlay-slide-up {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease; //@include Overlay(absolute, 0, 0, 0, 0, 0, 100%, 0, .5s ease, hidden);
+    @include OverlayColor($accentColor);
+    .img-overlay-text {
+      @include OverlayText($mainColor, 1em, absolute, 50%, 50%, translate(-50%, -50%), hidden, nowrap);
+    }
+  }
+  .img-overlay-slide-left {
+    @include Overlay(absolute, 0, 0, 0, 0, 100%, 0, 0, .5s ease, hidden);
+    @include OverlayColor($accentColor);
+    .img-overlay-text {
+      @include OverlayText($mainColor, 1em, absolute, 50%, 50%, translate(-50%, -50%), hidden, nowrap);
+    }
+  }
+  .img-overlay-slide-right {
+    @include Overlay(absolute, 0, 0, 100%, 0, 100%, 0, 0, .5s ease, hidden);
+    @include OverlayColor($accentColor);
+    .img-overlay-text {
+      @include OverlayText($mainColor, 1em, absolute, 50%, 50%, translate(-50%, -50%), hidden, nowrap);
+    }
+  }
+}
+
+.img-overlay-container:hover {
+  .img-overlay-fade {
+    opacity: 1;
+  }
+  .img-overlay-slide-down {
+    bottom: 0;
+    height: 100%;
+    opacity: 1;
+  }
+  .img-overlay-slide-up {
+    height: 100%;
+    opacity: 1;
+  }
+  .img-overlay-slide-left {
+    width: 100%;
+    opacity: 1;
+  }
+  .img-overlay-slide-right {
+    width: 100%;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+//tooltip
+// <div class="tooltip">Hover over me
+//   <span class="tooltip-right">Tooltip text</span>
+// </div>
+.tooltip {
+  position: relative;
+  display: inline-block; // border: 1px solid $accentColor;
+  // padding: 10px;
+  span {
+    visibility: hidden;
+    width: 120px;
+    background-color: $accentColor;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+  }
+  .tooltip-right {
+    top: -5px;
+    left: 105%;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent $accentColor transparent transparent;
+    }
+  }
+  .tooltip-left {
+    top: -5px;
+    right: 105%;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent $accentColor;
+    }
+  }
+  .tooltip-top {
+    width: 120px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: $accentColor transparent transparent transparent;
+    }
+  }
+  .tooltip-bottom {
+    width: 120px;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent $accentColor transparent;
+    }
+  }
+}
+
+.tooltip:hover {
+  .tooltip-right {
+    visibility: visible;
+  }
+  .tooltip-left {
+    visibility: visible;
+  }
+  .tooltip-top {
+    visibility: visible;
+  }
+  .tooltip-bottom {
+    visibility: visible;
+  }
+}
+
+//cards
+// <div class="card">
+//<span class="card-header"><h4>A title</h4></span>
+//   <div class="card-body">
+//     <p>content</p> 
+//   </div>
+// </div>
+.card {
+  @include flexbox;
+  @include flex-direction(column);
+  @include transition(0.3s);
+  @include flex(1, 0, auto);
+  margin: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 40%;
+  border-radius: 5px;
+  height: 100%;
+  .card-header {
+    font: {
+      family: $headingFont;
+      size: 1em;
+      weight: bold;
+    }
+    padding: 0.5em;
+    border-bottom: 1px solid $accentColor;
+  }
+  .card-body,
+  .card-container {
+    @include flexbox;
+    @include flex-direction(column);
+    padding: 2px 16px;
+    padding: 1em; // height: 100%;
+  }
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+//alerts
+// <div class="alert-basic">
+//   <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span> 
+//   Alert content here
+// </div>
+.alert {
+  padding: 20px;
+  color: $mainColor;
+  border-radius: 6px;
+  margin: 10px;
+  .close-btn {
+    margin-left: 15px;
+    color: $mainColor;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    @include transition(0.3s);
+    &:hover {
+      color: $secondaryColor;
+    }
+  }
+}
+
+.alert-basic {
+  @extend .alert;
+  background-color: $accentColor;
+}
+
+.alert-warning {
+  @extend .alert;
+  background-color: $warningColor;
+}
+
+.alert-success {
+  @extend .alert;
+  background-color: $successColor;
+}
+
+.alert-info {
+  @extend .alert;
+  background-color: $infoColor;
+}
+
+.alert-danger {
+  @extend .alert;
+  background-color: $dangerColor;
+}
+
+//parallax
+.parallax {
+  height: 100% !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important; // img {
+  //   width: 20%;
+  // }
+}
+
+//modal source: w3schools
+// <button id="btn-modal">Open Modal</button>
+//         <div id="modal" class="modal">
+//           <div class="modal-content-light">
+//             <div class="modal-header-light">
+//               <span class="close">&times;</span>
+//               <h4>Header</h4>
+//             </div>
+//             <div class="modal-body-light">
+//               <p class="tagline">Modal content</p>
+//             </div>
+//             <div class="modal-footer-light">
+//               <h5>Footer</h5>
+//             </div>
+//           </div>
+//         </div>
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-comp {
+  padding: 2px 16px;
+}
+
+.modal-content-comp {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  border-radius: 6px;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  @include keyframe(animatetop) {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+  @include animation(none, 0.4s, animatetop);
+}
+
+.modal-light {
+  .modal-content {
+    @extend .modal-content-comp;
+    background-color: $mainColor;
+    color: $secondaryColor;
+    .modal-header {
+      @extend .modal-comp;
+      background-color: $mainColor;
+      color: $secondaryColor;
+      @include font-heading();
+      border-bottom: 1px solid $accentColor;
+      .close {
+        color: lightenColor($secondaryColor, 70%);
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        &:hover {
+          color: lightenColor($secondaryColor, 80%);
+          text-decoration: none;
+          cursor: pointer;
+        }
+        &:focus {
+          color: lightenColor($secondaryColor, 80%);
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+    .modal-body {
+      @extend .modal-comp;
+      @include font-body();
+      background-color: $mainColor;
+      color: $secondaryColor;
+    }
+    .modal-footer {
+      @extend .modal-comp;
+      @include font-heading();
+      background-color: $mainColor;
+      color: $secondaryColor;
+    }
+  }
+}
+
+.modal-dark {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #fff;
+  }
+  p,
+  div,
+  span {
+    color: #fff;
+  }
+  .modal-content {
+    @extend .modal-content-comp;
+    background-color: $secondaryColor;
+    color: $mainColor;
+    .modal-header {
+      @extend .modal-comp;
+      background-color: $secondaryColor;
+      color: $mainColor;
+      border-bottom: 1px solid $mainColor;
+      @include font-heading();
+      .close {
+        color: lightenColor($secondaryColor, 70%);
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        &:hover {
+          color: lightenColor($secondaryColor, 80%);
+          text-decoration: none;
+          cursor: pointer;
+        }
+        &:focus {
+          color: lightenColor($secondaryColor, 80%);
+          text-decoration: none;
+          cursor: pointer;
+        }
+      }
+    }
+    .modal-body {
+      @extend .modal-comp;
+      @include font-body();
+      background-color: $secondaryColor;
+      color: $mainColor;
+    }
+    .modal-footer {
+      @extend .modal-comp;
+      @include font-heading();
+      background-color: $secondaryColor;
+      color: $mainColor;
+    }
+  }
+}
+
+//pagination source: w3schools
+// <div id="pagination-container" class="pagination">
+// </div>
+#pagination-container {
+  a {
+    float: left;
+    padding: 8px 16px;
+    @include transition(background-color 4s);
+  }
+}
+
+.pag-left {
+  a {
+    float: left;
+    padding: 8px 16px;
+    @include transition(background-color 4s);
+  }
+}
+
+.pag-right {
+  a {
+    float: right;
+    padding: 8px 16px;
+    @include transition(background-color 4s);
+  }
+}
+
+.pag-light {
+  a:hover {
+    background-color: $accentColor;
+    color: $mainColor;
+  }
+  a:hover:not(.active) {
+    background-color: #ddd;
+  }
+}
+
+.pag-dark {
+  a:active {
+    background-color: $accentColor;
+    color: $mainColor;
+  }
+  a:hover:not(.active) {
+    background-color: #ddd;
+  }
+}
+
+//carousel
+// <div id="carousel-container" class="carousel">
+//<div class="carousel-image">
+//<img src="images/parallax1.jpg">
+//<div class="carousel-caption">Caption</div>
+//</div>
+//<div class="carousel-image">
+//  <img src="images/parallax2.jpg">
+//  <div class="carousel-caption">Caption</div>
+//</div>
+//<div class="carousel-image">
+//  <img src="images/parallax3.jpg">
+//  <div class="carousel-caption">Caption</div>
+//</div>
+// <a id="carousel-left">&#10094;</a>
+// <a id="carousel-right">&#10095;</a>
+// <div class="indicator-container">
+//   <span class="carousel-indicator"></span>
+//   <span class="carousel-indicator"></span>
+//   <span class="carousel-indicator"></span>
+// </div>
+//</div>
+#carousel-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  box-sizing: border-box;
+  .carousel-image {
+    display: none;
+    @include animation(0, 2s, fade);
+    @include keyframe(fade) {
+      from {
+        opacity: 0.4;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    img {
+      vertical-align: middle;
+      height: auto;
+      width: 100%;
+    }
+    .carousel-caption {
+      color: $mainColor;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 40px;
+      width: 100%;
+      text-align: center;
+      @include font-body();
+    }
+  }
+  .carousel-left {
+    @extend .carousel-arrow;
+  }
+  .carousel-right {
+    @extend .carousel-arrow;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+}
+
+.carousel-arrow {
+  color: $mainColor;
+  font-weight: bold;
+  font-size: 1.2em;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  border-radius: 0 3px 3px 0;
+  @include transition(0.6s ease);
+}
+
+.indicator-container {
+  @include flex();
+  @include flex-direction(row);
+  position: absolute;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
+  .carousel-indicator {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: lightenColor($secondaryColor, 80%);
+    border-radius: 50%;
+    display: inline-block;
+    @include transition(background-color 0.6s ease);
+    &:hover {
+      background-color: lightenColor($secondaryColor, 60%) !important;
+    }
+  }
+}
+
+.active-carousel {
+  background-color: lightenColor($secondaryColor, 60%) !important;
+}
+
+//nav dropdown
+// <nav class="nav-light-color three-col-nav-dropdown">
+// <ul class="nav-list">
+//   <li>
+//     <a href="index.html">Home</a>
+//   </li>
+// </ul>
+// <button class="dropdown-nav-btn">JavaScript
+//   <i class="fa fa-caret-down"></i>
+// </button>
+// <div class="dropdown-nav-container">
+//   <ul>
+//     <li>
+//       <a href="jsnav.html">Dropdown Navbar</a>
+//     </li>
+//   </ul>
+// </div>
+// </nav>
+.three-col-nav-dropdown {
+  @extend .three-col-nav;
+  overflow-x: hidden;
+  .dropdown-nav-btn {
+    font-size: 1em;
+    border: none;
+    background: none;
+    text-decoration: none;
+    .fa-caret {
+      margin-left: 5px;
+      float: right;
+      padding-right: 8px;
+    }
+    &:hover {
+      color: getComplement($accentTwo);
+    }
+  }
+  .dropdown-nav-container {
+    display: none;
+    a {
+      padding-left: 8px;
+    }
+  }
+}
+
+.navbar-fixed-col-dropdown {
+  @include flexbox;
+  @include align-items(center);
+  @include justify-content(space-between);
+  @include flex(0, 1, auto);
+  max-width: 100%;
+  padding: 20px;
+  a {
+    float: left;
+    margin: 5px;
+  }
+  overflow: hidden;
+  .dropdown-nav-wrapper {
+    float: left;
+    overflow: hidden;
+    .dropdown-nav-btn {
+      font-size: 1em;
+      border: none;
+      background: none;
+      text-decoration: none;
+      .fa-caret {
+        margin-left: 5px;
+        float: right;
+        padding-right: 8px;
+      }
+      &:hover {
+        color: getComplement($accentTwo);
+      }
+    }
+    .dropdown-nav-container {
+      display: none;
+      position: absolute;
+      background-color: $mainColor;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      ul {
+        li {
+          a {
+            float: none !important;
+            padding: 12px 16px;
+            display: block; //text-align: left;
+          }
+        }
+      }
+    }
+  }
+}
+
+//popups
+// <div class="popup">Cick popup
+//   <span class="popup-content"></span>
+// </div>
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  span {
+    visibility: hidden;
+    background-color: $accentColor;
+    width: 160px;
+    padding: 8px 0;
+    color: $mainColor;
+    text-align: center;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: $accentColor transparent transparent transparent;
+    }
+  }
+  .show {
+    visibility: visible;
+    @include animation(0, 1s, fadeIn);
+    @include keyframe(fadeIn) {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+//dropdown list
+// <div id="dd" class="dropdown-list" tabindex="1">
+//             <span>Dropdown</span>
+//             <ul class="dropdown-list-contents">
+//               <li>
+//                 <a href="#">Link</a>
+//               </li>
+//               <li>
+//                 <a href="#">Link</a>
+//               </li>
+//               <li>
+//                 <a href="#">Link</a>
+//               </li>
+//             </ul>
+//           </div>
+.dropdown-list {
+  position: relative;
+  width: 200px; //margin: 0 auto;
+  padding: 10px;
+  background: $mainColor;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 1px rgba(50, 50, 50, 0.1);
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  color: $accentColor;
+  &:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -3px;
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: $accentColor transparent;
+  }
+  .dropdown-list-contents {
+    visibility: hidden;
+    position: absolute;
+    top: 140%;
+    left: 0;
+    right: 0;
+    background: $mainColor;
+    color: $accentColor;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.17);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-weight: normal;
+    pointer-events: none;
+    @include transition(0.5s ease-in); //transition: all 0.5s ease-in;
+    ul {
+      li {
+        display: block;
+        padding: 12px;
+        color: $accentColor; //border-bottom: 1px solid #e6e8ea;
+        border-bottom: 1px solid lightenColor($accentColor, 20%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
+        @include transition(0.3s ease-out); //transition: all 0.3s ease-out;
+        a {
+          display: block;
+          padding: 12px;
+          color: $accentColor; //border-bottom: 1px solid #e6e8ea;
+          border-bottom: 1px solid lightenColor($accentColor, 20%);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1);
+          @include transition(0.3s ease-out); //transition: all 0.3s ease-out;
+        }
+      }
+    }
+    &:after {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      bottom: 100%;
+      right: 15px;
+      border-width: 0 6px 6px 6px;
+      border-style: solid;
+      border-color: $mainColor transparent;
+    }
+    &:before {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      bottom: 100%;
+      right: 13px;
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: rgba(0, 0, 0, 0.1) transparent;
+    }
+  }
+  .active {
+    visibility: visible;
+  }
+}
+
+.message-otd {
+  @extend .alert;
+  background-color: getComplement($accentTwo);
+  display: inline-block;
+  vertical-align: right;
+  width: 40%;
+  span {
+    color: $mainColor;
+    font-weight: normal;
+  }
+}
+
+@media all and (max-width:890px) {
+  .message-otd {
+    span {
+      font-size: 0.8em;
+    }
+  }
+}
+
+@media all and (max-width:860px) {
+  .dropdown-nav-btn {
+    @include font-body();
+    font-weight: normal;
+    font {
+      size: 0.8em;
+    }
+  }
+  .message-otd {
+    width: 50%;
+  }
+  .card {
+    width: 95%;
+    .card-body {
+      @include flex-direction(row);
+    }
+  }
+}
+
+@media all and (max-width:640px) {
+  .message-otd {
+    width: 80%;
+  }
+}
+
+@media all and (max-width:500px) {
+  #carousel-container {
+    .carousel-image {
+      .carousel-caption {
+        bottom: 30px;
+        font-size: 0.8em;
+      }
+    }
+  }
+  .indicator-container {
+    bottom: 5px;
+    .carousel-indicator {
+      height: 10px;
+      width: 10px;
+    }
+  }
+}
+
+@media all and (max-width:320px) {
+  .dropdown-nav-btn {
+    @include font-body();
+    font-weight: normal;
+    font {
+      size: 0.7em;
+    }
+  }
+  #carousel-container {
+    .carousel-image {
+      .carousel-caption {
+        bottom: 25px !important;
+      }
+    }
+  }
+  .indicator-container {
+    bottom: 5px;
+    .carousel-indicator {
+      height: 5px;
+      width: 5px;
+    }
+  }
+  .carousel-arrow {
+    font-size: 0.9em;
+  }
+}

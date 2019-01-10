@@ -1,0 +1,715 @@
+//set structural properties
+@import "main-styles";
+@import "layout";
+@import "images";
+@import "transitions";
+html,
+body,
+div,
+span,
+p,
+blockquote,
+pre,
+a,
+cite,
+code,
+small,
+strike,
+strong,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary {
+  @include body-style(1em);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include heading-style();
+}
+
+h1 {
+  font: {
+    size: 2.8em;
+  }
+  padding-bottom: 8px;
+  padding-top: 2px;
+}
+
+h2 {
+  font: {
+    size: 2.5em;
+  }
+  padding-bottom: 8px;
+  padding-top: 2px;
+}
+
+h3 {
+  font: {
+    size: 2em;
+  }
+  padding-bottom: 8px;
+  padding-top: 2px;
+}
+
+h4 {
+  font: {
+    size: 1.8em;
+  }
+  padding-bottom: 8px;
+  padding-top: 2px;
+}
+
+h5 {
+  font: {
+    size: 1.5em;
+  }
+  padding-bottom: 8px;
+  padding-top: 2px;
+}
+
+h6 {
+  font: {
+    size: 1.3em;
+  }
+  padding-bottom: 8px;
+  padding-top: 2px;
+}
+
+blockquote {
+  background-color: $accentColor;
+  color: $mainColor;
+  display: block;
+  margin: 1.5em 10px;
+  padding: 1em 10px;
+  border-radius: 6px;
+  quotes: "\201C""\201D""\2018""\2019";
+  &:before {
+    content: open-quote;
+  }
+  &:after {
+    content: close-quote;
+  }
+}
+
+q {
+  quotes: "\201C""\201D""\2018""\2019";
+  &:before {
+    content: open-quote;
+  }
+  &:after {
+    content: close-quote;
+  }
+}
+
+a {
+  text-decoration: none;
+  &:link {
+    color: $secondaryColor;
+  }
+  &:visited {
+    color: $secondaryColor;
+  }
+  &:hover {
+    color: $accentColor;
+  }
+  &:active {
+    color: $accentColor;
+  }
+}
+
+.nav-dark {
+  @include dark-nav();
+}
+
+.nav-light {
+  @include light-nav();
+}
+
+.nav-light-color {
+  @include light-nav-color();
+}
+
+.inline-list {
+  li {
+    float: left;
+    margin: 15px;
+  }
+}
+
+div {
+  @include flex(1, 0, auto);
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 2px solid $accentColor;
+  margin: 1em 0;
+  padding: 0;
+  width: 100%;
+}
+
+p {
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex-wrap(column);
+  margin: 10px;
+}
+
+.tagline {
+  font: {
+    size: 1.2em;
+  }
+  margin-top: 20px;
+}
+
+.center-block {
+  margin: auto;
+  width: 50%;
+}
+
+.center {
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(center);
+}
+
+.trans {
+  width: 100px;
+  height: 100px;
+  background: $accentColor;
+  color: $mainColor;
+  text-align: center;
+  padding: 5px;
+}
+
+.test-trans-w {
+  @extend .trans;
+  &:hover {
+    width: 300px;
+  }
+}
+
+.test-trans-h {
+  @extend .trans;
+  &:hover {
+    height: 200px;
+  }
+}
+
+//BUTTONS//
+@mixin ButtonShadowTransition() {
+  @include transition(0.4s);
+}
+
+@mixin ButtonShadow() {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn {
+  font: {
+    family: $headingFont;
+    size: 1em;
+  }
+  border: none;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  margin: 2px 4px;
+}
+
+.btn-basic {
+  @extend .btn;
+  background-color: lightenColor($secondaryColor, 70%);
+  color: $secondaryColor;
+  @include ButtonShadowTransition();
+  &:hover {
+    @include ButtonShadow();
+  }
+}
+
+.btn-primary {
+  @extend .btn;
+  background-color: $accentColor;
+  color: $mainColor;
+  @include ButtonShadowTransition();
+  &:hover {
+    @include ButtonShadow();
+  }
+}
+
+.btn-info {
+  @extend .btn;
+  background-color: $infoColor;
+  color: $mainColor;
+  @include ButtonShadowTransition();
+  &:hover {
+    @include ButtonShadow();
+  }
+}
+
+.btn-success {
+  @extend .btn;
+  background-color: $successColor;
+  color: $mainColor;
+  @include ButtonShadowTransition();
+  &:hover {
+    @include ButtonShadow();
+  }
+}
+
+.btn-warning {
+  @extend .btn;
+  background-color: $warningColor;
+  color: $mainColor;
+  @include ButtonShadowTransition();
+  &:hover {
+    @include ButtonShadow();
+  }
+}
+
+.btn-danger {
+  @extend .btn;
+  background-color: $dangerColor;
+  color: $mainColor;
+  @include ButtonShadowTransition();
+  &:hover {
+    @include ButtonShadow();
+  }
+}
+
+.btn-arrow {
+  @extend .btn;
+  background-color: $accentColor;
+  color: $mainColor;
+  transition: all 0.5s;
+  width: 100px;
+  span {
+    color: $mainColor;
+    font: {
+      family: $headingFont;
+      size: 1em;
+    }
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    &:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
+  }
+}
+
+.btn-arrow:hover span {
+  padding-right: 25px;
+}
+
+.btn-arrow:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.btn-modal {
+  @extend .btn-primary;
+}
+
+//NEED JS//
+.dropdown-btn {
+  @extend .btn-primary;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  &:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    ul {
+      li {
+        padding: 12px 10px;
+        margin: 2px;
+        display: block;
+      }
+    }
+  }
+}
+
+//FORM
+.form {
+  @include flexbox();
+  @include flex-direction(column);
+  border-radius: 6px;
+  padding: 20px;
+  margin: 10px;
+  label {
+    font: {
+      family: $headingFont;
+      weight: bold;
+    }
+  }
+  input {
+    margin-top: 10px;
+  }
+  input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    &:focus {
+      border: 1px solid $accentColor;
+    }
+  }
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    &:focus {
+      border: 1px solid $accentColor;
+    }
+  }
+  input[type=submit] {
+    @extend .btn-primary;
+    padding: 14px 20px;
+    margin: 8px 0;
+    width: 100%;
+    &:focus {
+      border: 1px solid getComplement($accentTwo);
+    }
+  }
+}
+
+form {
+  input:focus {
+    border-color: getComplement($accentTwo);
+  }
+}
+
+.form-border {
+  @extend .form;
+  border: 2px solid $accentColor;
+}
+
+.form-bg {
+  @extend .form;
+  background-color: darkenColor($mainColor, 5%);
+}
+
+.form-color {
+  @extend .form-bg;
+  @extend .form-border;
+}
+
+//TABLE
+.table-basic {
+  margin: 15px;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    th {
+      font: {
+        family: $headingFont;
+        size: 1.2em;
+        weight: bold;
+      }
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid lightenColor($secondaryColor, 80%);
+    }
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid lightenColor($secondaryColor, 80%);
+    }
+  }
+}
+
+.table-color-heading {
+  @extend .table-basic;
+  th {
+    background-color: $accentColor;
+    color: $mainColor;
+    border: none;
+    border-bottom: none;
+  }
+}
+
+.table-color {
+  @extend .table-color-heading;
+  tr {
+    border-radius: 10px;
+    &:nth-child(even) {
+      background-color: lighten($secondaryColor, 80%);
+    }
+    td {
+      border: none;
+    }
+  }
+}
+
+.table-hvr-row {
+  @extend .table-basic;
+  tr:hover {
+    background-color: $accentColor;
+    th {
+      color: $mainColor;
+    }
+    td {
+      color: $mainColor;
+    }
+  }
+}
+
+//code
+// &amp; → & (ampersand, U+0026)
+// &lt; → < (less-than sign, U+003C)
+// &gt; → > (greater-than sign, U+003E)
+// &quot; → " (quotation mark, U+0022)
+// &apos; → ' (apostrophe, U+0027)
+// .code-wrapper {
+//   background-color: lightenColor($secondaryColor, 90%); // padding: 10px;
+//   // margin: 10px;
+//   border-radius: 6px;
+//   overflow: auto;
+//   pre {
+//     white-space: normal;
+//     margin: 0;
+//     padding: 0;
+//     @include flexbox();
+//     @include flex-direction(row);
+//     code {
+//       @include flexbox();
+//       @include flex-direction(row); //background-color: lightenColor($secondaryColor, 90%);
+//       color: $secondaryColor;
+//       @include font-code(0.8em);
+//     }
+//   }
+// }
+pre {
+  background-color: lightenColor($secondaryColor, 90%);
+  border-radius: 6px;
+  padding: 12px 0px 14px 0;
+  width: 90%;
+  line-height: 150%;
+  @include flexbox();
+  @include flex-direction(row);
+  @include font-code(0.8em);
+}
+
+code {
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  @include font-code(0.8em);
+  color: $secondaryColor;
+  @include flexbox();
+  @include flex-direction(row);
+}
+
+samp {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  @include font-code(0.8em);
+}
+
+.em-title {
+  $tempColor: getComplement($accentTwo);
+  color: darkenColor($tempColor, 10%);
+}
+
+@media all and (max-width: 768px) {
+  pre {
+    @include flex-direction(column);
+    @include flex-wrap(wrap);
+    overflow: auto;
+    margin: 5px; //white-space: pre-wrap;
+    text-align: justify; //word-wrap: break-word;
+    @include font-code(0.8em);
+  }
+  code {
+    @include flex-direction(column);
+    @include flex-wrap(wrap);
+    @include font-code(0.8em);
+  }
+  blockquote {
+    background-color: $accentColor;
+    color: $mainColor;
+    display: block;
+    margin: 1.5em 10px;
+    padding: 1em 10px;
+    border-radius: 6px;
+    quotes: "\201C""\201D""\2018""\2019";
+    &:before {
+      content: open-quote;
+    }
+    &:after {
+      content: close-quote;
+    }
+  }
+}
+
+@media all and (max-width: 320px) {
+  h1 {
+    font: {
+      size: 2.4em;
+    }
+  }
+  h2 {
+    font: {
+      size: 2.2em;
+    }
+  }
+  h3 {
+    font: {
+      size: 2em;
+    }
+  }
+  h4 {
+    font: {
+      size: 1.8em;
+    }
+  }
+  h5 {
+    font: {
+      size: 1.5em;
+    }
+  }
+  h6 {
+    font: {
+      size: 1.3em;
+    }
+  }
+  html,
+  body,
+  div,
+  span,
+  p,
+  blockquote,
+  pre,
+  a,
+  cite,
+  code,
+  small,
+  strike,
+  strong,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  footer,
+  header,
+  hgroup,
+  menu,
+  section,
+  summary {
+    @include body-style(0.93em);
+  }
+  table {
+    overflow-x: auto;
+    th {
+      font: {
+        size: 1em;
+      }
+    }
+  }
+  pre {
+    @include flex-direction(column);
+    @include flex-wrap(wrap);
+    overflow: auto;
+    margin: 5px; //white-space: pre-wrap;
+    text-align: justify; //word-wrap: break-word;
+    @include font-code(0.6em);
+  }
+  code {
+    margin-left: 5px;
+    @include flex-direction(column);
+    @include flex-wrap(wrap);
+    @include font-code(0.6em);
+  }
+  blockquote {
+    background-color: $accentColor;
+    color: $mainColor;
+    display: block;
+    margin: 1.5em 10px;
+    padding: 1em 10px;
+    border-radius: 6px;
+    quotes: "\201C""\201D""\2018""\2019";
+    &:before {
+      content: open-quote;
+    }
+    &:after {
+      content: close-quote;
+    }
+  }
+}

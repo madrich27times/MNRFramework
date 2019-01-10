@@ -1,0 +1,35 @@
+$mainColor: #fff;
+$secondaryColor: #000;
+// $accentColor: #5BACFF;
+$accentTwo: #5BACFF;
+$accentColor: #4bc4cd;
+//$accentComplement: getComplement($accentColor);
+$accentComplement: getComplement($accentTwo);
+
+$warningColor: #F4CDA5;
+$successColor: #5DB5A4;
+// $infoColor: #9DDCFF;
+$infoColor: #5bacff;
+$dangerColor: #ED5276;
+$primaryColor: #183658;
+
+
+$lighterMain: lighten($mainColor, 10%);
+$darkerMain: darken($mainColor, 10%);
+$lighterSecondary: lighten($secondaryColor, 10%);
+$darkenSecondary: darken($secondaryColor, 10%);
+$lighterAccent: lighten($accentColor, 10%);
+$darkerAccent: darken($accentColor, 10%);
+
+
+@function lightenColor($color, $value: 10%) {
+  @return lighten($color, $value);
+}
+
+@function darkenColor($color, $value: 10%) {
+  @return darken($color, $value);
+}
+
+@function getComplement($color){
+  @return complement($color);
+}

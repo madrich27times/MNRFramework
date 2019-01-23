@@ -148,7 +148,15 @@ function init(response) {
   }
 }
 
+function setFooter() {
+  var footer = document.getElementsByTagName("footer")[0];
+  var copyright = "&copy;";
+  var currentYear = new Date().getFullYear();
+  footer.innerHTML = "Maddy Richard " + copyright + currentYear;
+}
+
 function elementsInit() {
+  setFooter();
   var allElements = document.body.getElementsByTagName("*");
   for (let i = 0; i < allElements.length; i++) {
     if (allElements[i].classList.contains("parallax")) {
